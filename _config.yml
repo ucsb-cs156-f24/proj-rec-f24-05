@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f24/proj-rec-f24-05
 owner: ucsb-cs156-f24
 repo_name: proj-rec-f24-05
-pull_requests: []
+pull_requests: [{"author":{"id":"U_kgDOB1QJQw","is_bot":false,"login":"RyanZanone","name":""},"headRefName":"rz-requestTypeGetAll","number":47,"title":"Added RequestType CRUD operation for GET all","url":"https://github.com/ucsb-cs156-f24/proj-rec-f24-05/pull/47"}]
