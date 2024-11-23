@@ -83,7 +83,7 @@ import jakarta.validation.Valid;
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
     @PutMapping(&quot;&quot;)
     public RequestType updateRequestType(
-            @Parameter(name=&quot;requestType&quot;) @RequestParam Long id,
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id,
             @RequestBody @Valid RequestType incoming) {
 
 
