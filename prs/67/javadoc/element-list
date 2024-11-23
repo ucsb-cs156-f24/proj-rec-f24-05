@@ -1,0 +1,10 @@
+edu.ucsb.cs156.rec
+edu.ucsb.cs156.rec.aop
+edu.ucsb.cs156.rec.config
+edu.ucsb.cs156.rec.controllers
+edu.ucsb.cs156.rec.entities
+edu.ucsb.cs156.rec.errors
+edu.ucsb.cs156.rec.models
+edu.ucsb.cs156.rec.repositories
+edu.ucsb.cs156.rec.services
+edu.ucsb.cs156.rec.services.wiremock
