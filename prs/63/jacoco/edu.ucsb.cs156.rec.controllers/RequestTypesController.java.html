@@ -41,7 +41,7 @@ import jakarta.validation.Valid;
     @Autowired
     RequestTypeRepository requestTypeRepository;
 
-        /**
+    /**
      * List all Request Types
      * 
      * @return an iterable of RequestType
@@ -54,6 +54,22 @@ import jakarta.validation.Valid;
 <span class="fc" id="L54">        return types;</span>
     }
 
+    /**
+     * Get a single request type by id
+     * 
+     * @param id the id of the request type
+     * @return a RequestType
+     */
+    @Operation(summary= &quot;Get a single request type&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
+    @GetMapping(&quot;&quot;)
+    public RequestType getById(
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
+<span class="fc" id="L68">        RequestType requestType = requestTypeRepository.findById(id)</span>
+<span class="fc" id="L69">                .orElseThrow(() -&gt; new EntityNotFoundException(RequestType.class, id));</span>
+
+<span class="fc" id="L71">        return requestType;</span>
+    }
   
     /**
      * Create a new request type
@@ -69,18 +85,18 @@ import jakarta.validation.Valid;
             @Parameter(name=&quot;requestType&quot;) @RequestParam String requestType){
 
         // Checks to see if the requestType is a duplicate or not 
-<span class="fc" id="L72">        Optional&lt;RequestType&gt; allElements = requestTypeRepository.findByRequestType(requestType);</span>
+<span class="fc" id="L88">        Optional&lt;RequestType&gt; allElements = requestTypeRepository.findByRequestType(requestType);</span>
 
-<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (allElements.isPresent()){</span>
-<span class="fc" id="L75">            throw new DuplicateArgumentException(requestType);</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        if (allElements.isPresent()){</span>
+<span class="fc" id="L91">            throw new DuplicateArgumentException(requestType);</span>
         }
     
 
         // Creates the new request type and returns it 
-<span class="fc" id="L80">        RequestType requestType1 = new RequestType();</span>
-<span class="fc" id="L81">        requestType1.setRequestType(requestType);</span>
-<span class="fc" id="L82">        RequestType savedRequestType = requestTypeRepository.save(requestType1);</span>
-<span class="fc" id="L83">        return savedRequestType;</span>
+<span class="fc" id="L96">        RequestType requestType1 = new RequestType();</span>
+<span class="fc" id="L97">        requestType1.setRequestType(requestType);</span>
+<span class="fc" id="L98">        RequestType savedRequestType = requestTypeRepository.save(requestType1);</span>
+<span class="fc" id="L99">        return savedRequestType;</span>
 
     }
 
@@ -101,24 +117,24 @@ import jakarta.validation.Valid;
             @RequestBody @Valid RequestType incoming) {
 
 
-<span class="fc" id="L104">        String new_request_type = incoming.getRequestType();</span>
+<span class="fc" id="L120">        String new_request_type = incoming.getRequestType();</span>
 
         // Checks to see if the requestType is a duplicate or not 
         // If duplicate, it throws a DuplicateArgumentException
-<span class="fc" id="L108">        Optional&lt;RequestType&gt; allElements = requestTypeRepository.findByRequestType(new_request_type);</span>
-<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (allElements.isPresent()){</span>
-<span class="fc" id="L110">            throw new DuplicateArgumentException(new_request_type);</span>
+<span class="fc" id="L124">        Optional&lt;RequestType&gt; allElements = requestTypeRepository.findByRequestType(new_request_type);</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">        if (allElements.isPresent()){</span>
+<span class="fc" id="L126">            throw new DuplicateArgumentException(new_request_type);</span>
         }
 
         // Attempts to find the requestType in the table 
-<span class="fc" id="L114">        RequestType modifiedRequestType = requestTypeRepository.findById(id)</span>
-<span class="fc" id="L115">                .orElseThrow(() -&gt; new EntityNotFoundException(RequestType.class, id));</span>
+<span class="fc" id="L130">        RequestType modifiedRequestType = requestTypeRepository.findById(id)</span>
+<span class="fc" id="L131">                .orElseThrow(() -&gt; new EntityNotFoundException(RequestType.class, id));</span>
 
 
         // Updates the instance in the table and returns it 
-<span class="fc" id="L119">        modifiedRequestType.setRequestType(new_request_type);</span>
-<span class="fc" id="L120">        requestTypeRepository.save(modifiedRequestType);</span>
-<span class="fc" id="L121">        return modifiedRequestType;</span>
+<span class="fc" id="L135">        modifiedRequestType.setRequestType(new_request_type);</span>
+<span class="fc" id="L136">        requestTypeRepository.save(modifiedRequestType);</span>
+<span class="fc" id="L137">        return modifiedRequestType;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
