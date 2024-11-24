@@ -42,21 +42,33 @@ import jakarta.validation.Valid;
     RequestTypeRepository requestTypeRepository;
 
     /**
-     * Delete a RequestType
+     * List all Request Types
      * 
-     * @param id the id of the request type to delete
-     * @return a message indicating the request type was deleted
+     * @return an iterable of RequestType
      */
-    @Operation(summary= &quot;Delete a Request Type&quot;)
-    @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
-    @DeleteMapping(&quot;&quot;)
-    public Object deleteRequestType(
-            @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
-<span class="fc" id="L55">        RequestType requestType = requestTypeRepository.findById(id)</span>
-<span class="fc" id="L56">                .orElseThrow(() -&gt; new EntityNotFoundException(RequestType.class, id));</span>
+    @Operation(summary= &quot;List all request types&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
+    @GetMapping(&quot;/all&quot;)
+    public Iterable&lt;RequestType&gt; allRequestTypes() {
+<span class="fc" id="L53">        Iterable&lt;RequestType&gt; types = requestTypeRepository.findAll();</span>
+<span class="fc" id="L54">        return types;</span>
+    }
 
-<span class="fc" id="L58">        requestTypeRepository.delete(requestType);</span>
-<span class="fc" id="L59">        return genericMessage(&quot;RequestType with id %s deleted&quot;.formatted(id));</span>
+    /**
+     * Get a single request type by id
+     * 
+     * @param id the id of the request type
+     * @return a RequestType
+     */
+    @Operation(summary= &quot;Get a single request type&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
+    @GetMapping(&quot;&quot;)
+    public RequestType getById(
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
+<span class="fc" id="L68">        RequestType requestType = requestTypeRepository.findById(id)</span>
+<span class="fc" id="L69">                .orElseThrow(() -&gt; new EntityNotFoundException(RequestType.class, id));</span>
+
+<span class="fc" id="L71">        return requestType;</span>
     }
   
     /**
@@ -73,18 +85,18 @@ import jakarta.validation.Valid;
             @Parameter(name=&quot;requestType&quot;) @RequestParam String requestType){
 
         // Checks to see if the requestType is a duplicate or not 
-<span class="nc" id="L76">        Optional&lt;RequestType&gt; allElements = requestTypeRepository.findByRequestType(requestType);</span>
+<span class="fc" id="L88">        Optional&lt;RequestType&gt; allElements = requestTypeRepository.findByRequestType(requestType);</span>
 
-<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (allElements.isPresent()){</span>
-<span class="nc" id="L79">            throw new DuplicateArgumentException(requestType);</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        if (allElements.isPresent()){</span>
+<span class="fc" id="L91">            throw new DuplicateArgumentException(requestType);</span>
         }
     
 
         // Creates the new request type and returns it 
-<span class="nc" id="L84">        RequestType requestType1 = new RequestType();</span>
-<span class="nc" id="L85">        requestType1.setRequestType(requestType);</span>
-<span class="nc" id="L86">        RequestType savedRequestType = requestTypeRepository.save(requestType1);</span>
-<span class="nc" id="L87">        return savedRequestType;</span>
+<span class="fc" id="L96">        RequestType requestType1 = new RequestType();</span>
+<span class="fc" id="L97">        requestType1.setRequestType(requestType);</span>
+<span class="fc" id="L98">        RequestType savedRequestType = requestTypeRepository.save(requestType1);</span>
+<span class="fc" id="L99">        return savedRequestType;</span>
 
     }
 
@@ -105,24 +117,24 @@ import jakarta.validation.Valid;
             @RequestBody @Valid RequestType incoming) {
 
 
-<span class="nc" id="L108">        String new_request_type = incoming.getRequestType();</span>
+<span class="fc" id="L120">        String new_request_type = incoming.getRequestType();</span>
 
         // Checks to see if the requestType is a duplicate or not 
         // If duplicate, it throws a DuplicateArgumentException
-<span class="nc" id="L112">        Optional&lt;RequestType&gt; allElements = requestTypeRepository.findByRequestType(new_request_type);</span>
-<span class="nc bnc" id="L113" title="All 2 branches missed.">        if (allElements.isPresent()){</span>
-<span class="nc" id="L114">            throw new DuplicateArgumentException(new_request_type);</span>
+<span class="fc" id="L124">        Optional&lt;RequestType&gt; allElements = requestTypeRepository.findByRequestType(new_request_type);</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">        if (allElements.isPresent()){</span>
+<span class="fc" id="L126">            throw new DuplicateArgumentException(new_request_type);</span>
         }
 
         // Attempts to find the requestType in the table 
-<span class="nc" id="L118">        RequestType modifiedRequestType = requestTypeRepository.findById(id)</span>
-<span class="nc" id="L119">                .orElseThrow(() -&gt; new EntityNotFoundException(RequestType.class, id));</span>
+<span class="fc" id="L130">        RequestType modifiedRequestType = requestTypeRepository.findById(id)</span>
+<span class="fc" id="L131">                .orElseThrow(() -&gt; new EntityNotFoundException(RequestType.class, id));</span>
 
 
         // Updates the instance in the table and returns it 
-<span class="nc" id="L123">        modifiedRequestType.setRequestType(new_request_type);</span>
-<span class="nc" id="L124">        requestTypeRepository.save(modifiedRequestType);</span>
-<span class="nc" id="L125">        return modifiedRequestType;</span>
+<span class="fc" id="L135">        modifiedRequestType.setRequestType(new_request_type);</span>
+<span class="fc" id="L136">        requestTypeRepository.save(modifiedRequestType);</span>
+<span class="fc" id="L137">        return modifiedRequestType;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
