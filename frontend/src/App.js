@@ -96,6 +96,29 @@ function App() {
             />
           </>
         )}
+        {hasRole(currentUser, "ROLE_USER") && (
+          <>
+            <Route
+              exact
+              path="/admin/requests"
+              element={<PlaceholderIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_ADMIN") && (
+          <>
+            <Route
+              exact
+              path="/admin/requests/edit/:id"
+              element={<PlaceholderEditPage />}
+            />
+            <Route
+              exact
+              path="/admin/requests/create"
+              element={<PlaceholderCreatePage />}
+            />
+          </>
+        )}
       </Routes>
     </BrowserRouter>
   );
