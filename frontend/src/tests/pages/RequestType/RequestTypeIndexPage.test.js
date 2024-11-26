@@ -95,7 +95,7 @@ describe("RequestTypeIndexPage tests", () => {
       "4",
     );
 
-    const createRequestTypeButton = screen.queryByText("Create RequestType");
+    const createRequestTypeButton = screen.queryByText("Create Request Type");
     expect(createRequestTypeButton).not.toBeInTheDocument();
 
     const type = screen.getByText("Scholarship or Fellowship");

@@ -11,9 +11,9 @@ import RestaurantIndexPage from "main/pages/Restaurants/RestaurantIndexPage";
 import RestaurantCreatePage from "main/pages/Restaurants/RestaurantCreatePage";
 import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
 
-import PlaceholderIndexPage from "main/pages/Placeholder/PlaceholderIndexPage";
-import PlaceholderCreatePage from "main/pages/Placeholder/PlaceholderCreatePage";
-import PlaceholderEditPage from "main/pages/Placeholder/PlaceholderEditPage";
+import RequestTypeIndexPage from "main/pages/RequestType/RequestTypeIndexPage";
+import RequestTypeCreatePage from "main/pages/RequestType/RequestTypeCreatePage";
+import RequestTypeEditPage from "main/pages/RequestType/RequestTypeEditPage";
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
@@ -77,8 +77,8 @@ function App() {
           <>
             <Route
               exact
-              path="/placeholder"
-              element={<PlaceholderIndexPage />}
+              path="/requesttypes"
+              element={<RequestTypeIndexPage />}
             />
           </>
         )}
@@ -86,13 +86,13 @@ function App() {
           <>
             <Route
               exact
-              path="/placeholder/edit/:id"
-              element={<PlaceholderEditPage />}
+              path="/requesttypes/edit/:id"
+              element={<RequestTypeEditPage />}
             />
             <Route
               exact
-              path="/placeholder/create"
-              element={<PlaceholderCreatePage />}
+              path="/requesttypes/create"
+              element={<RequestTypeCreatePage />}
             />
           </>
         )}
