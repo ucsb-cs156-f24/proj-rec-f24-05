@@ -5,7 +5,7 @@ name: "82-kanban-slack-update.yml"
 
 on:
   schedule:
-    - cron: "0 0,17 * * *"  # 0,17 UTC are 4pm and 9am Pacific Time
+    - cron: "0 17 * * *"  # Run at 9:00 AM PST / 5:00 PM UTC
   workflow_dispatch:  # Allows manual triggering
 
 env:
@@ -14,7 +14,7 @@ env:
   TEAM: ${{ github.repository }}
   ORG_NAME: ${{ github.repository_owner }}
   COLUMNS: "Todo, In Progress, In Review, Done"
-  END_DATE: "2024-12-13"  # Set the end date for the workflow
+  END_DATE: "2024-11-13"  # Set the end date for the workflow
 
 jobs:
 
@@ -37,11 +37,9 @@ jobs:
             echo "Current date is before $end_date. Continuing workflow."
             echo "continue=true" >> "$GITHUB_OUTPUT"
           fi
-          OWNER_PLUS_REPOSITORY=${{github.repository}}
           OWNER=${{ github.repository_owner }}
-          REPOSITORY=${OWNER_PLUS_REPOSITORY/$OWNER\//}
-          if [[ "$REPOSITORY" == STARTER* ]]; then
-            echo "This workflow should not run on a starter repository"
+          if [[ "$OWNER" == "ucsb-cs156" ]]; then
+            echo "This workflow should not run on repos in the ucsb-cs156 organization"
             echo "continue=false" >> "$GITHUB_OUTPUT"
           fi
           if [[ -f "$GITHUB_OUTPUT" ]]; then
