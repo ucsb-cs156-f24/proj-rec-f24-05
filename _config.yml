@@ -1,4 +1,3 @@
-
 title: Documentation
 description: >- # this means to ignore newlines until "baseurl:"
   When reviewing a PR for this repo, you can see what the documentation,
@@ -18,9 +17,7 @@ collections:
     permalink: /branches/:path/
 
 repo_name: "TBD"
-
-
 repo: ucsb-cs156-f24/proj-rec-f24-05
 owner: ucsb-cs156-f24
 repo_name: proj-rec-f24-05
-pull_requests: [{"author":{"id":"MDQ6VXNlcjI1MjgzOTIx","is_bot":false,"login":"ishanjainofficial","name":"Ishan Jain"},"headRefName":"ishan-requestTypeDropdown","number":74,"title":"Added dropdown for Request Type","url":"https://github.com/ucsb-cs156-f24/proj-rec-f24-05/pull/74"},{"author":{"id":"U_kgDOB1P9DQ","is_bot":false,"login":"bgggggh","name":""},"headRefName":"bh-recomm-nevbar","number":73,"title":"added Request tab under Admin","url":"https://github.com/ucsb-cs156-f24/proj-rec-f24-05/pull/73"},{"author":{"id":"U_kgDOB1QJQw","is_bot":false,"login":"RyanZanone","name":""},"headRefName":"rz-requestTypeDelete","number":67,"title":"Added DELETE operation for RequestType","url":"https://github.com/ucsb-cs156-f24/proj-rec-f24-05/pull/67"}]
+pull_requests: [{"author":{"id":"MDQ6VXNlcjI5MzkxNjA1","is_bot":false,"login":"17acastelein","name":""},"headRefName":"requestTypePages","number":75,"title":"Created requestType Pages plus a prettier run","url":"https://github.com/ucsb-cs156-f24/proj-rec-f24-05/pull/75"},{"author":{"id":"MDQ6VXNlcjI1MjgzOTIx","is_bot":false,"login":"ishanjainofficial","name":"Ishan Jain"},"headRefName":"ishan-requestTypeDropdown","number":74,"title":"Added dropdown for Request Type","url":"https://github.com/ucsb-cs156-f24/proj-rec-f24-05/pull/74"},{"author":{"id":"U_kgDOB1P9DQ","is_bot":false,"login":"bgggggh","name":""},"headRefName":"bh-recomm-nevbar","number":73,"title":"added Request tab under Admin","url":"https://github.com/ucsb-cs156-f24/proj-rec-f24-05/pull/73"},{"author":{"id":"U_kgDOB1QJQw","is_bot":false,"login":"RyanZanone","name":""},"headRefName":"rz-requestTypeDelete","number":67,"title":"Added DELETE operation for RequestType","url":"https://github.com/ucsb-cs156-f24/proj-rec-f24-05/pull/67"}]
