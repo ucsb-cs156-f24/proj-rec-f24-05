@@ -15,6 +15,10 @@ import PlaceholderIndexPage from "main/pages/Placeholder/PlaceholderIndexPage";
 import PlaceholderCreatePage from "main/pages/Placeholder/PlaceholderCreatePage";
 import PlaceholderEditPage from "main/pages/Placeholder/PlaceholderEditPage";
 
+import RequestTypeIndexPage from "main/pages/RequestType/RequestTypeIndexPage";
+import RequestTypeCreatePage from "main/pages/RequestType/RequestTypeCreatePage";
+import RequestTypeEditPage from "main/pages/RequestType/RequestTypeEditPage";
+
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -93,6 +97,29 @@ function App() {
               exact
               path="/placeholder/create"
               element={<PlaceholderCreatePage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_USER") && (
+          <>
+            <Route
+              exact
+              path="/requesttypes"
+              element={<RequestTypeIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_ADMIN") && (
+          <>
+            <Route
+              exact
+              path="/requesttypes/edit/:id"
+              element={<RequestTypeEditPage />}
+            />
+            <Route
+              exact
+              path="/requesttypes/create"
+              element={<RequestTypeCreatePage />}
             />
           </>
         )}
