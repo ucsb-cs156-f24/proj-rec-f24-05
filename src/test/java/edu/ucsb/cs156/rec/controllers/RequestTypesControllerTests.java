@@ -67,6 +67,7 @@ public class RequestTypesControllerTests extends ControllerTestCase {
                                 .andExpect(status().is(403)); // logged out users can't get by id
         }
 
+
         // // Tests with mocks for database actions
 
         @WithMockUser(roles = { "USER" })
@@ -113,6 +114,51 @@ public class RequestTypesControllerTests extends ControllerTestCase {
                 assertEquals("RequestType with id 7 not found", json.get("message"));
         }
 
+        @WithMockUser(roles = { "ADMIN", "USER" })
+        @Test
+        public void admin_can_delete_a_request_type() throws Exception {
+                // arrange
+
+                RequestType requestType1 = RequestType.builder()
+                                .requestType("CS Department BS/MS program")
+                                .build();
+
+                when(requestTypeRepository.findById(eq(15L))).thenReturn(Optional.of(requestType1));
+
+                // act
+                MvcResult response = mockMvc.perform(
+                                delete("/api/requesttypes?id=15")
+                                                .with(csrf()))
+                                .andExpect(status().isOk()).andReturn();
+
+                // assert
+                verify(requestTypeRepository, times(1)).findById(15L);
+                verify(requestTypeRepository, times(1)).delete(any());
+
+                Map<String, Object> json = responseToJson(response);
+                assertEquals("RequestType with id 15 deleted", json.get("message"));
+        }
+
+        @WithMockUser(roles = { "ADMIN", "USER" })
+        @Test
+        public void admin_tries_to_delete_non_existant_requesttype_and_gets_right_error_message()
+                        throws Exception {
+                // arrange
+
+                when(requestTypeRepository.findById(eq(15L))).thenReturn(Optional.empty());
+
+                // act
+                MvcResult response = mockMvc.perform(
+                                delete("/api/requesttypes?id=15")
+                                                .with(csrf()))
+                                .andExpect(status().isNotFound()).andReturn();
+
+                // assert
+                verify(requestTypeRepository, times(1)).findById(15L);
+                Map<String, Object> json = responseToJson(response);
+                assertEquals("RequestType with id 15 not found", json.get("message"));
+        }
+
         @WithMockUser(roles = { "USER" })
         @Test
         public void logged_in_user_can_get_all_ucsbdates() throws Exception {
@@ -143,7 +189,8 @@ public class RequestTypesControllerTests extends ControllerTestCase {
                 String responseString = response.getResponse().getContentAsString();
                 assertEquals(expectedJson, responseString);
         }
-        
+
+                
         // Authorization tests for /api/phones/post
         // (Perhaps should also have these for put and delete)
 
