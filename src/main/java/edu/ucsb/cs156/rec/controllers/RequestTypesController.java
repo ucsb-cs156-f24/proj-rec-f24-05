@@ -118,23 +118,6 @@ public class RequestTypesController extends ApiController {
 
     }
 
-        /**
-     * Deletes a restaurant. Accessible only to users with the role "ROLE_ADMIN".
-     * @param id id of the restaurant to delete
-     * @return a message indicating that the restaurant was deleted
-     */
-    @Operation(summary = "Delete a Restaurant")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("")
-    public Object deleteRestaurant(
-            @Parameter(name = "id") @RequestParam Long id) {
-        RequestType requestType = requestTypeRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(RequestType.class, id));
-
-        requestTypeRepository.delete(requestType);
-        return genericMessage("Request Type with id %s deleted".formatted(id));
-    }
-
     /**
      * Update a single request type
      * 

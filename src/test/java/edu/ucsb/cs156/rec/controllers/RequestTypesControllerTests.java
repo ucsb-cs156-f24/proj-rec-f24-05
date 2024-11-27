@@ -239,31 +239,6 @@ public class RequestTypesControllerTests extends ControllerTestCase {
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void admin_can_delete_a_request_type() throws Exception {
-                // arrange
-
-                RequestType requestType = RequestType.builder()
-                                .requestType("Taco Bell")
-                                .build();
-
-                when(requestTypeRepository.findById(eq(15L))).thenReturn(Optional.of(requestType));
-
-                // act
-                MvcResult response = mockMvc.perform(
-                                delete("/api/requesttypes?id=15")
-                                                .with(csrf()))
-                                .andExpect(status().isOk()).andReturn();
-
-                // assert
-                verify(requestTypeRepository, times(1)).findById(15L);
-                verify(requestTypeRepository, times(1)).delete(any());
-
-                Map<String, Object> json = responseToJson(response);
-                assertEquals("Request Type with id 15 deleted", json.get("message"));
-        }
-
-        @WithMockUser(roles = { "ADMIN", "USER" })
-        @Test
         public void admin_tries_to_delete_non_existant_request_type_and_gets_right_error_message()
                         throws Exception {
                 // arrange
