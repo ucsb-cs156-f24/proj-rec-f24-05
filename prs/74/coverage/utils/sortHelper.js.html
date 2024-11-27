@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.27% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">73.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/15</span>
+                <span class='fraction'>11/15</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.27% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -83,41 +83,41 @@
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export function compareValues(key, order = "asc") {
     return function innerSort(a, b) {
-      <span class="missing-if-branch" title="else path not taken" >E</span>if (!a.hasOwnProperty(key) || <span class="branch-1 cbranch-no" title="branch not covered" >!b.hasOwnProperty(key))</span> {
+      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
         return 0;
       }
   
-      const varA = <span class="cstat-no" title="statement not covered" >typeof a[key] === "string" ? a[key].toUpperCase() : a[key];</span>
-      const varB = <span class="cstat-no" title="statement not covered" >typeof b[key] === "string" ? b[key].toUpperCase() : b[key];</span>
+      const varA = typeof a[key] === "string" ? a[key].toUpperCase() : <span class="branch-1 cbranch-no" title="branch not covered" >a[key];</span>
+      const varB = typeof b[key] === "string" ? b[key].toUpperCase() : <span class="branch-1 cbranch-no" title="branch not covered" >b[key];</span>
   
-      let comparison = <span class="cstat-no" title="statement not covered" >0;</span>
-<span class="cstat-no" title="statement not covered" >      if (varA &gt; varB) {</span>
-<span class="cstat-no" title="statement not covered" >        comparison = 1;</span>
-      } else <span class="cstat-no" title="statement not covered" >if (varA &lt; varB) {</span>
-<span class="cstat-no" title="statement not covered" >        comparison = -1;</span>
+      let comparison = 0;
+      if (varA &gt; varB) {
+        comparison = 1;
+      } else <span class="missing-if-branch" title="else path not taken" >E</span>if (varA &lt; varB) {
+        comparison = -1;
       }
-<span class="cstat-no" title="statement not covered" >      return (</span>
-        order === "desc" ? comparison * -1 : comparison
+      return (
+        order === "desc" ? <span class="branch-0 cbranch-no" title="branch not covered" >comparison * -1 </span>: comparison
       );
     };
   }</pre></td></tr></table></pre>
@@ -127,7 +127,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-27T01:04:04.764Z
+                at 2024-11-27T03:15:01.685Z
             </div>
         <script src="../prettify.js"></script>
         <script>
